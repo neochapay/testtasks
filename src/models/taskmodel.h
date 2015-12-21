@@ -19,11 +19,10 @@ public slots:
     void update();
     void insert();
 
-    void setTitle(QString title){m_title = title;}
     void setBody(QString body){m_body = body;}
 
 private:
-    QString m_title;
+    int create_timestamp;
     QString m_body;
 
     static QHash<int, Task*> cache;

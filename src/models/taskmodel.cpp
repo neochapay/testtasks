@@ -17,7 +17,7 @@ Task* Task::toInt(int id)
 
     QSqlDatabase db = dbAdapter::instance().db;
     QSqlQuery query(db);
-    query.prepare("SELECT title,body FROM tasks WHERE id=:id");
+    query.prepare("SELECT create_timestamp,body FROM tasks WHERE id=:id");
     query.bindValue(":id",id);
 
     bool ok = query.exec();
@@ -29,7 +29,7 @@ Task* Task::toInt(int id)
     {
         Task* task = new Task();
         task->id = id;
-        task->m_title = query.value(0).toString();
+        task->create_timestamp = query.value(0).toInt();
         task->m_body = query.value(1).toString();
         cache.insert(id,task);
         return task;
@@ -62,8 +62,7 @@ void Task::update()
 {
     QSqlDatabase db = dbAdapter::instance().db;
     QSqlQuery query(db);
-    query.prepare("UPDATE tasks SET title=:title, body=:body WHERE id=:id");
-    query.bindValue(":title",this->m_title);
+    query.prepare("UPDATE tasks SET body=:body WHERE id=:id");
     query.bindValue(":body",this->m_body);
     query.bindValue(":id",this->id);
 
