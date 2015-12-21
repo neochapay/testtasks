@@ -21,7 +21,7 @@ dbAdapter::dbAdapter(QObject *parent) : QObject(parent)
 
     query = QSqlQuery(db);
 
-    if(QFile(QStandardPaths::DataLocation+"/db.sqlite").size() == 0)
+    if(QFile(db_dir+"/db.sqlite").size() == 0)
     {
         initDB();
     }
