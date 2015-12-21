@@ -1,5 +1,6 @@
 import QtQuick 2.3
-import QtQuick.Controls 1.2
+import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.1
 
 import "qml/components/material"
 
@@ -70,6 +71,7 @@ ApplicationWindow {
                     if(rootRect.state == "addview")
                     {
                         rootRect.state = "defview"
+                        taskBody.text = ""
                     }
                 }
             }
@@ -104,8 +106,13 @@ ApplicationWindow {
                     margins: 16 * dp
                 }
 
-                Text{
-                    text: "ADD"
+                TextArea{
+                    id: taskBody
+                    width: parent.width
+                    height: root.height-actionBar.height-32*dp
+                    anchors{
+                        top: parent.top
+                    }
                 }
             }
         }
