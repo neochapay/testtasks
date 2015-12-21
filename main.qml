@@ -11,27 +11,6 @@ ApplicationWindow {
     title: "Tasks"
     color: "white"
 
-    /*function goToAd()
-    {
-        taskList.visible = false;
-        taskAdd.visible = true;
-        rightButton.visible = true;
-
-        actionBar.text = "Добавить заметку"
-        leftButton.iconSource = "qrc:/qml/components/assets/icon_back.svg";
-
-    }
-
-    function goToList()
-    {
-        taskList.visible = true;
-        taskAdd.visible = false;
-        rightButton.visible = false;
-
-        actionBar.text = "Заметки"
-        leftButton.iconSource = "qrc:/qml/components/assets/icon_menu.svg";
-    }*/
-
     Rectangle{
         id: rootRect
         state: "defview"
