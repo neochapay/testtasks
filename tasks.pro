@@ -5,7 +5,8 @@ CONFIG += c++11
 
 SOURCES += main.cpp \
     src/models/taskmodel.cpp \
-    src/dbadapter.cpp
+    src/dbadapter.cpp \
+    src/models/tasksqlmodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -48,5 +49,6 @@ DISTFILES += \
 
 HEADERS += \
     src/models/taskmodel.h \
-    src/dbadapter.h
+    src/dbadapter.h \
+    src/models/tasksqlmodel.h
 
