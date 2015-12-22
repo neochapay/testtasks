@@ -8,15 +8,22 @@ static dbAdapter *dbAdapterInstance = 0;
 
 dbAdapter::dbAdapter(QObject *parent) : QObject(parent)
 {
-    QString db_dir = QStandardPaths::locate(QStandardPaths::GenericDataLocation,"", QStandardPaths::LocateDirectory);
+    QString db_dir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     QMutexLocker locker(&lock);
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(db_dir+"/db.sqlite");
 
+    //Проверяем наличие дирректории
+    QDir dir(db_dir);
+    if(!dir.exists())
+    {
+        dir.mkpath(db_dir);
+    }
+
     //Проверяем наличие базы
     if(!db.open())
     {
-          qDebug() << db.lastError().text();
+          qDebug() << "CAN`T OPEN DB: " << db.lastError().driverText();
     }
 
     query = QSqlQuery(db);
