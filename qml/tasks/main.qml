@@ -2,7 +2,7 @@ import QtQuick 2.3
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.1
 
-import "qml/components/material"
+import "components/material"
 
 ApplicationWindow {
     id: root
@@ -22,7 +22,7 @@ ApplicationWindow {
                 PropertyChanges {target: taskAdd; visible: false}
                 PropertyChanges {target: rightButton; visible: false}
                 PropertyChanges {target: actionBar; text: "Заметки"}
-                PropertyChanges {target: leftButton; iconSource: "qrc:/qml/components/assets/icon_menu.svg"}
+                PropertyChanges {target: leftButton; iconSource: "img/icon_menu.svg"}
             },
             State {
                 name: "addview"
@@ -30,7 +30,7 @@ ApplicationWindow {
                 PropertyChanges {target: taskAdd; visible: true}
                 PropertyChanges {target: rightButton; visible: true}
                 PropertyChanges {target: actionBar; text: "Добавить заметки"}
-                PropertyChanges {target: leftButton; iconSource: "qrc:/qml/components/assets/icon_back.svg"}
+                PropertyChanges {target: leftButton; iconSource: "img/icon_back.svg"}
             }
 
         ]
@@ -49,7 +49,7 @@ ApplicationWindow {
                 anchors.left: parent.left
                 anchors.leftMargin: 16 * dp
                 anchors.verticalCenter: parent.verticalCenter
-                iconSource: "qrc:/qml/components/assets/icon_menu.svg"
+                iconSource: "img/icon_menu.svg"
 
                 onClicked: {
                     if(rootRect.state == "addview")
@@ -64,7 +64,7 @@ ApplicationWindow {
                 anchors.right: parent.right
                 anchors.rightMargin: 16 * dp
                 anchors.verticalCenter: parent.verticalCenter
-                iconSource: "qrc:/qml/components/assets/check.svg"
+                iconSource: "img/check.svg"
                 visible: false
 
                 onClicked: {
@@ -137,12 +137,11 @@ ApplicationWindow {
             }
 
             color: "#FFEB3B"
-            iconSource: "qrc:/qml/components/assets/icon_add.svg"
+            iconSource: "img/icon_add.svg"
             onClicked: {
                 rootRect.state = "addview"
             }
         }
     }
-
 }
 
