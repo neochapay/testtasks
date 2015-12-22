@@ -17,9 +17,12 @@ public slots:
     static Task* toInt(int task_id);
     void remove();
     void update();
-    void insert();
+    int insert();
 
     void setBody(QString body){m_body = body;}
+
+    QString getBody(){return m_body;}
+    int getCreateTimestamp(){return create_timestamp;}
 
 private:
     int create_timestamp;

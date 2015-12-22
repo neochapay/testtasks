@@ -31,16 +31,17 @@ Task* Task::toInt(int id)
     {
         Task* task = new Task();
         task->id = id;
-        task->create_timestamp = query.value(0).toInt();
-        task->m_body = query.value(1).toString();
+        task->create_timestamp = query.value(1).toInt();
+        task->m_body = query.value(2).toString();
         cache.insert(id,task);
+
         return task;
     }
     cache.insert(id,0);
     return 0;
 }
 
-void Task::insert()
+int Task::insert()
 {
     QSqlDatabase db = dbAdapter::instance().db;
     QSqlQuery query(db);
@@ -53,6 +54,18 @@ void Task::insert()
     {
         qDebug() << query.lastQuery() << query.lastError().text();
     }
+
+    query.prepare("SELECT seq FROM sqlite_sequence where name='tasks'");
+    bool ok2 = query.exec();
+    if(!ok2)
+    {
+        qDebug() << query.lastQuery() << query.lastError().text();
+    }
+    else if(query.next())
+    {
+        return query.value("seq").toInt();
+    }
+    return 0;
 }
 
 void Task::remove()

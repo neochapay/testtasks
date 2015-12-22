@@ -30,5 +30,6 @@
         <file>qml/tasks/img/icon_send-colored.svg</file>
         <file>qml/tasks/img/icon_send.svg</file>
         <file>qml/tasks/img/rubbish.svg</file>
+        <file>qml/tasks/components/TaskList.qml</file>
     </qresource>
 </RCC>

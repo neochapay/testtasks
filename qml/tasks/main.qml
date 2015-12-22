@@ -2,6 +2,7 @@ import QtQuick 2.3
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.1
 
+import "components/"
 import "components/material"
 
 import TaskAdapter 1.0
@@ -75,6 +76,8 @@ ApplicationWindow {
                         newTask.setBody(taskBody.text)
                         newTask.insert();
 
+                        TaskSqlModel.refresh();
+
                         rootRect.state = "defview"
                         taskBody.text = ""
                     }
@@ -103,9 +106,9 @@ ApplicationWindow {
                     id: taskListView
                     model: TaskSqlModel
                     anchors.fill: parent
-                    delegate: Rectangle{
-
-                    }
+                    delegate: TaskList{}
+                    spacing: 6
+                    anchors.topMargin: 6
                 }
             }
 

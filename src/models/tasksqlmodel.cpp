@@ -4,13 +4,13 @@
 
 TaskSqlModel::TaskSqlModel(QObject *parent) : QSqlQueryModel(parent)
 {
-    hash.insert(Qt::UserRole,QByteArray("id"));
+    hash.insert(Qt::UserRole,QByteArray("task_id"));
     hash.insert(Qt::UserRole+1,QByteArray("body"));
-    hash.insert(Qt::UserRole+1,QByteArray("create_timestamp"));
+    hash.insert(Qt::UserRole+2,QByteArray("create_timestamp"));
     refresh();
 }
 
-const char* TaskSqlModel::SQL_SELECT = "SELECT * FROM tasks ORDER BY create_timestamp ASC";
+const char* TaskSqlModel::SQL_SELECT = "SELECT id as task_id,body,create_timestamp FROM tasks ORDER BY create_timestamp DESC";
 
 QVariant TaskSqlModel::data(const QModelIndex &index, int role) const{
     QVariant value = QSqlQueryModel::data(index, role);
@@ -30,12 +30,12 @@ QVariant TaskSqlModel::data(const QModelIndex &index, int role) const{
 
 void TaskSqlModel::searchQuery(QString name)
 {
-    SQL_SELECT = QString("SELECT * FROM tasks WHERE `body` LIKE '%%1%' ORDER BY create_timestamp ASC").arg(name).toUtf8();
+    SQL_SELECT = QString("SELECT id as task_id,body,create_timestamp FROM tasks WHERE `body` LIKE '%%1%' ORDER BY create_timestamp DESC").arg(name).toUtf8();
 }
 
 void TaskSqlModel::cleanQuery()
 {
-    SQL_SELECT = "SELECT * FROM tasks ORDER BY create_timestamp ASC";
+    SQL_SELECT = "SELECT id as task_id,body,create_timestamp FROM tasks ORDER BY create_timestamp DESC";
 }
 
 void TaskSqlModel::refresh()
