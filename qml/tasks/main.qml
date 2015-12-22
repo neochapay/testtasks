@@ -4,6 +4,8 @@ import QtQuick.Controls.Styles 1.1
 
 import "components/material"
 
+import TaskAdapter 1.0
+
 ApplicationWindow {
     id: root
     width: isMobile ? 320 : 360
@@ -70,6 +72,9 @@ ApplicationWindow {
                 onClicked: {
                     if(rootRect.state == "addview")
                     {
+                        newTask.setBody(taskBody.text)
+                        newTask.insert();
+
                         rootRect.state = "defview"
                         taskBody.text = ""
                     }
@@ -93,6 +98,15 @@ ApplicationWindow {
                 anchors{
                     fill: parent
                 }
+
+                ListView{
+                    id: taskListView
+                    model: TaskSqlModel
+                    anchors.fill: parent
+                    delegate: Rectangle{
+
+                    }
+                }
             }
 
             Rectangle {
@@ -104,6 +118,10 @@ ApplicationWindow {
                     left: parent.left
                     right: parent.right
                     margins: 16 * dp
+                }
+
+                Task{
+                    id: newTask
                 }
 
                 TextArea{

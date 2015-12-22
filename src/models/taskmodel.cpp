@@ -1,3 +1,5 @@
+#include <QDateTime>
+
 #include "taskmodel.h"
 #include "../dbadapter.h"
 
@@ -17,7 +19,7 @@ Task* Task::toInt(int id)
 
     QSqlDatabase db = dbAdapter::instance().db;
     QSqlQuery query(db);
-    query.prepare("SELECT create_timestamp,body FROM tasks WHERE id=:id");
+    query.prepare("SELECT id as task_id, create_timestamp,body FROM tasks WHERE id=:id");
     query.bindValue(":id",id);
 
     bool ok = query.exec();
@@ -40,7 +42,17 @@ Task* Task::toInt(int id)
 
 void Task::insert()
 {
+    QSqlDatabase db = dbAdapter::instance().db;
+    QSqlQuery query(db);
+    query.prepare("INSERT INTO tasks (`body`, `create_timestamp`) VALUES (:body, :create_timestamp)");
+    query.bindValue(":body",this->m_body);
+    query.bindValue(":create_timestamp",QDateTime::currentMSecsSinceEpoch());
 
+    bool ok = query.exec();
+    if(!ok)
+    {
+        qDebug() << query.lastQuery() << query.lastError().text();
+    }
 }
 
 void Task::remove()

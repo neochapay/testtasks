@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
     int dpi = screen->physicalDotsPerInch() * screen->devicePixelRatio();
     qreal dp = dpi / 160.f;
 
-    qmlRegisterType<Task>("taskAdapter",1,0,"Task");
+    qmlRegisterType<Task>("TaskAdapter",1,0,"Task");
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("dp", dp);
