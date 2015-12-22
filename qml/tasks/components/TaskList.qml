@@ -30,5 +30,19 @@ Rectangle {
         font.pixelSize: 32*dp
         color: "#2E2E2E"
     }
+
+    MouseArea{
+        anchors.fill: parent
+        onClicked: {
+            console.log(task_id);
+            rootRect.current_task = task_id;
+            rootRect.state = "addview"
+            taskBody.text = body;
+        }
+
+        onPressAndHold: {
+            listItem.color = "#CCCCCC"
+        }
+    }
 }
 

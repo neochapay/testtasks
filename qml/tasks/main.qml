@@ -17,6 +17,9 @@ ApplicationWindow {
 
     Rectangle{
         id: rootRect
+
+        property int current_task: 0;
+
         state: "defview"
         states: [
             State{
@@ -73,9 +76,17 @@ ApplicationWindow {
                 onClicked: {
                     if(rootRect.state == "addview")
                     {
-                        newTask.setBody(taskBody.text)
-                        newTask.insert();
-
+                        if(rootRect.current_task == 0)
+                        {
+                            newTask.setBody(taskBody.text)
+                            newTask.insert();
+                        }
+                        else
+                        {
+                            var utask = newTask.toInt(rootRect.current_task)
+                            utask.setBody(taskBody.text);
+                            utask.update();
+                        }
                         TaskSqlModel.refresh();
 
                         rootRect.state = "defview"
