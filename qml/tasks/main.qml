@@ -86,6 +86,7 @@ ApplicationWindow {
                             var utask = newTask.toInt(rootRect.current_task)
                             utask.setBody(taskBody.text);
                             utask.update();
+                            rootRect.current_task = 0;
                         }
                         TaskSqlModel.refresh();
 
