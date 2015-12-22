@@ -41,6 +41,6 @@ dbAdapter& dbAdapter::instance(){
 
 void dbAdapter::initDB()
 {
-    db.exec("CREATE TABLE `tasks` (`id` INTEGER PRIMARY KEY AUTOINCREMENT,`current_timestamp` NUMERIC NOT NULL,`body` TEXT)");
+    db.exec("CREATE TABLE `tasks` (`id` INTEGER PRIMARY KEY AUTOINCREMENT,`create_timestamp` NUMERIC NOT NULL,`body` TEXT)");
     emit baseCreate();
 }
