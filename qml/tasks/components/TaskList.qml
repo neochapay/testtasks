@@ -11,6 +11,15 @@ Rectangle {
     x:6
     y:6
 
+    Component.onCompleted: {
+        rootRect.backClicked.connect(resetState)
+    }
+
+    function resetState()
+    {
+        listItem.state = "default";
+    }
+
     states: [
         State{
             name: "default";

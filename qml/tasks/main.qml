@@ -21,6 +21,8 @@ ApplicationWindow {
         property int current_task: 0;
         property variant check_task: [];
 
+        signal backClicked();
+
         state: "defview"
         states: [
             State{
@@ -69,10 +71,12 @@ ApplicationWindow {
                 iconSource: "img/icon_menu.svg"
 
                 onClicked: {
-                    if(rootRect.state == "addview")
+                    if(rootRect.state != "defview")
                     {
                         rootRect.state = "defview"
                     }
+
+                    rootRect.backClicked();
                 }
             }
 
@@ -145,8 +149,6 @@ ApplicationWindow {
                     {
                         rootRect.state = "default"
                     }
-
-                    console.log(rootRect.check_task)
                 }
             }
 
