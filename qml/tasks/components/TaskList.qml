@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import QtGraphicalEffects 1.0
 
+import "material"
+
 Rectangle {
     id: listItem
     height: 120*dp
@@ -40,6 +42,8 @@ Rectangle {
         }
         font.pixelSize: 32*dp
         color: "#2E2E2E"
+        height: 32*dp
+        clip: true
     }
 
     MouseArea{
