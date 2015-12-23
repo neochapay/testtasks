@@ -15,6 +15,10 @@ ApplicationWindow {
     title: "Tasks"
     color: "white"
 
+    Task{
+        id: rootTask
+    }
+
     Rectangle{
         id: rootRect
 
@@ -75,7 +79,6 @@ ApplicationWindow {
                     {
                         rootRect.state = "defview"
                     }
-
                     rootRect.backClicked();
                 }
             }
@@ -107,6 +110,21 @@ ApplicationWindow {
 
                         rootRect.state = "defview"
                         taskBody.text = ""
+                    }
+
+                    if(rootRect.state == "checked")
+                    {
+                        rootRect.check_task.forEach(function(task_id){
+                            var task = rootTask.toInt(task_id);
+                            task.remove();
+                            var index = rootRect.check_task.indexOf(task_id);
+                            if(index > -1)
+                            {
+                                rootRect.check_task.splice(index, 1) // Я думаю можно проще
+                            }
+                        })
+                        TaskSqlModel.refresh();
+                        rootRect.state = "defview"
                     }
                 }
             }
