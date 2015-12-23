@@ -46,6 +46,19 @@ Rectangle {
         clip: true
     }
 
+    Text{
+        id: createTimeText
+        text: Qt.formatDateTime(new Date(create_timestamp),"dddd, dd MMMM yyyy")
+        anchors{
+            bottom: parent.bottom
+            left: parent.left
+            bottomMargin: 16*dp
+            leftMargin: 14 *dp
+        }
+        font.pixelSize: 18*dp
+        color: "#2E2E2E"
+    }
+
     MouseArea{
         anchors.fill: parent
         onClicked: {
