@@ -72,11 +72,19 @@ Rectangle {
             if(listItem.state == "default")
             {
                 listItem.state = "selected"
+                rootRect.check_task.push(task_id)
             }
             else
             {
                 listItem.state = "default"
+                var index = rootRect.check_task.indexOf(task_id);
+                if(index > -1)
+                {
+                    rootRect.check_task.splice(index, 1) // Я думаю можно проще
+                }
             }
+
+            taskList.check();
         }
     }
 }

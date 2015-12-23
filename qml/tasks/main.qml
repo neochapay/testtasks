@@ -19,6 +19,7 @@ ApplicationWindow {
         id: rootRect
 
         property int current_task: 0;
+        property variant check_task: [];
 
         state: "defview"
         states: [
@@ -29,14 +30,24 @@ ApplicationWindow {
                 PropertyChanges {target: rightButton; visible: false}
                 PropertyChanges {target: actionBar; text: "Заметки"}
                 PropertyChanges {target: leftButton; iconSource: "img/icon_menu.svg"}
+                PropertyChanges {target: actionBar; color: "#2196F3"}
             },
             State {
                 name: "addview"
                 PropertyChanges {target: taskList; visible: false}
                 PropertyChanges {target: taskAdd; visible: true}
                 PropertyChanges {target: rightButton; visible: true}
+                PropertyChanges {target: rightButton; iconSource: "img/check.svg"}
                 PropertyChanges {target: actionBar; text: "Добавить заметки"}
                 PropertyChanges {target: leftButton; iconSource: "img/icon_back.svg"}
+                PropertyChanges {target: actionBar; color: "#2196F3"}
+            },
+            State {
+                name: "checked"
+                PropertyChanges {target: leftButton; iconSource: "img/icon_back.svg"}
+                PropertyChanges {target: rightButton; visible: true}
+                PropertyChanges {target: rightButton; iconSource: "img/rubbish.svg"}
+                PropertyChanges {target: actionBar; color: "#949494"}
             }
 
         ]
@@ -121,6 +132,21 @@ ApplicationWindow {
                     delegate: TaskList{}
                     spacing: 6
                     anchors.topMargin: 6
+                }
+
+                function check()
+                {
+                    if(rootRect.check_task.length > 0)
+                    {
+                        rootRect.state = "checked"
+                        actionBar.text = rootRect.check_task.length
+                    }
+                    else
+                    {
+                        rootRect.state = "default"
+                    }
+
+                    console.log(rootRect.check_task)
                 }
             }
 
