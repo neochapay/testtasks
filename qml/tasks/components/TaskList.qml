@@ -9,6 +9,17 @@ Rectangle {
     x:6
     y:6
 
+    states: [
+        State{
+            name: "default";
+            PropertyChanges {target: listItem; color: "white"}
+        },
+        State{
+            name: "selected";
+            PropertyChanges {target: listItem; color: "#CCCCCC"}
+        }
+    ]
+
     layer.enabled: true
     layer.effect: DropShadow {
         radius: 2
@@ -41,7 +52,14 @@ Rectangle {
         }
 
         onPressAndHold: {
-            listItem.color = "#CCCCCC"
+            if(listItem.state == "default")
+            {
+                listItem.state = "selected"
+            }
+            else
+            {
+                listItem.state = "default"
+            }
         }
     }
 }
